@@ -24,14 +24,4 @@ import org.demoiselle.jee.security.annotation.NotLogged;
 @Path("usuario")
 public class UsuarioREST extends AbstractREST<Usuario, String> {
 
-//    @POST
-//    @Override
-//    @Transactional
-//    @NotLogged
-//    @ValidatePayload
-//    @ApiOperation(value = "persist entity")
-//    public Usuario persist(Usuario entity) {
-//        return bc.persist(entity);
-//    }
-
 }

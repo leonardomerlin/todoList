@@ -51,20 +51,21 @@ public class Usuario implements Serializable {
     @Column(unique = true)
     private String id;
 
-    @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 128)
+    @Basic(optional = false)
+    @Size(min = 3, max = 128)
     @Column(nullable = false, length = 128)
     private String nome;
 
     @Email
-    @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 128)
+    @Basic(optional = false)
+    @Size(min = 5, max = 128)
     @Column(nullable = false, length = 128)
     private String email;
 
-    @Size(max = 16)
+    @NotNull
+    @Size(min = 8, max = 16)
     @Column(length = 16)
     private String senha;
 
