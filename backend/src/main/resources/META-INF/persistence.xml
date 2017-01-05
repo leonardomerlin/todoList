@@ -6,7 +6,6 @@
     <class>app.entity.Todo</class>
     <class>app.entity.Usuario</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
-    <shared-cache-mode>ALL</shared-cache-mode>
     <properties>
       <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
       <!--<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>-->

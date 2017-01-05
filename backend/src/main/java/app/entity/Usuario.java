@@ -22,8 +22,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 
@@ -34,6 +35,7 @@ import org.hibernate.validator.constraints.Email;
 @Entity
 @Table(name = "usuario")
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
     , @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id")
@@ -65,9 +67,13 @@ public class Usuario implements Serializable {
     private String email;
 
     @NotNull
-    @Size(min = 8, max = 16)
-    @Column(length = 16)
+    @Basic(optional = false)
+    @Size(min = 8, max = 128)
+    @Column(length = 128)
     private String senha;
+
+    @Column(length = 16)
+    private String perfil;
 
     @OneToMany(mappedBy = "usuario", targetEntity = Todo.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Todo> todos;
@@ -109,7 +115,6 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    @XmlTransient
     public String getSenha() {
         return senha;
     }
@@ -124,6 +129,14 @@ public class Usuario implements Serializable {
 
     public void setTodos(Set<Todo> todos) {
         this.todos = todos;
+    }
+
+    public String getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
 
     @Override

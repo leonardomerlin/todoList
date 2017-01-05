@@ -24,6 +24,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -34,6 +36,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "todo")
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
     @NamedQuery(name = "Todo.findAll", query = "SELECT u FROM Todo u")
     , @NamedQuery(name = "Todo.findById", query = "SELECT u FROM Todo u WHERE u.id = :id")

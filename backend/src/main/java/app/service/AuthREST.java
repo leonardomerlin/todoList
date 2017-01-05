@@ -21,7 +21,7 @@ import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
-import org.demoiselle.jee.security.annotation.LoggedIn;
+import org.demoiselle.jee.security.annotation.Authenticated;
 
 /**
  *
@@ -47,7 +47,7 @@ public class AuthREST {
     }
 
     @GET
-    @LoggedIn
+    @Authenticated
     @Asynchronous
     public void retoken(@Suspended final AsyncResponse asyncResponse) {
         asyncResponse.resume(doRetoken());

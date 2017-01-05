@@ -11,6 +11,7 @@ import app.util.MD5;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,9 +27,7 @@ import org.demoiselle.jee.core.api.security.DemoiselleUser;
 import org.demoiselle.jee.core.api.security.SecurityContext;
 import org.demoiselle.jee.core.api.security.Token;
 import org.demoiselle.jee.persistence.crud.AbstractDAO;
-import org.demoiselle.jee.persistence.crud.exception.DemoisellePersistenceCrudException;
 import org.demoiselle.jee.security.exception.DemoiselleSecurityException;
-import org.demoiselle.jee.security.jwt.impl.DemoiselleSecurityJWTConfig;
 import org.demoiselle.jee.security.message.DemoiselleSecurityMessages;
 
 /**
@@ -107,43 +106,14 @@ public class UsuarioDAO extends AbstractDAO<Usuario, String> {
     @Override
     public Usuario persist(Usuario entity) {
         entity.setSenha(MD5.parser(entity.getSenha()));
+        entity.setPerfil("USER");
         return super.persist(entity);
     }
 
     public String valida(String id) {
-//        Usuario usu = find(id);
-//        if (usu == null) {
-//
-//        }
-//        usu.setAtivo(Boolean.TRUE);
-//        usu.setValido(Boolean.TRUE);
-//        usu = merge(usu);
         return "Email Validado";
     }
 
-//    public String registro(Credentials credentials) {
-//        try {
-//            Perfil perfil = perfilDAO.find("7ce753ef-4eea-4fca-b746-b0767e1b7901");
-//            Usuario usu = new Usuario();
-//            usu.setNome(credentials.getName());
-//            usu.setEmail(credentials.getUsername());
-//            usu.setSenha(credentials.getPassword());
-//            usu.setPerfil(perfil);
-//            usu.setAtivo(Boolean.FALSE);
-//            usu.setValido(Boolean.FALSE);
-//            usu = persist(usu);
-//            Sistema sis = sisDAO.find(credentials.getSistema());
-//            Autorizacao auth = new Autorizacao();
-//            auth.setUsuario(usu);
-//            auth.setSistema(sis);
-//            authDAO.persist(auth);
-//            mm.send(usu.getEmail(), usu.getId());
-//            return "Email enviado";
-//        } catch (Exception e) {
-//            throw new DemoisellePersistenceCrudException("Registro com erro, tente novamente mais tarde", e);
-//        }
-////        return "Registro com erro, tente novamente mais tarde";
-//    }
     public String login(Credentials credentials) {
 
         Usuario usu = verifyEmail(credentials.getUsername(), credentials.getPassword());
@@ -156,14 +126,9 @@ public class UsuarioDAO extends AbstractDAO<Usuario, String> {
 
         loggedUser.setName(usu.getNome());
         loggedUser.setIdentity("" + usu.getId());
-        loggedUser.addRole("USER");
+        loggedUser.addRole(usu.getPerfil());
 
-//        lista.forEach((autorizacao) -> {
-//            loggedUser.addPermission(autorizacao.getFuncionalidade().getNome(),
-//                    autorizacao.getOperacao().getNome());
-//        });
         loggedUser.addParam("Email", usu.getEmail());
-        // config.setDestinatario(sistema.getId());
         securityContext.setUser(loggedUser);
 
         return token.getKey();
