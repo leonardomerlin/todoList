@@ -1,4 +1,4 @@
-describe('<%= name.kebab %>App E2E test', () => {
+describe('TodoApp E2E test', () => {
   beforeEach(() => {
     browser.get('/');
   });
@@ -8,11 +8,11 @@ describe('<%= name.kebab %>App E2E test', () => {
   });
 
   it('should have <tov-nav>', () => {
-    expect(element(by.css('<%= name.kebab %>-app top-nav')).isPresent()).toBe(true);
+    expect(element(by.css('Todo-app top-nav')).isPresent()).toBe(true);
   });
 
   it('should have <sidebar-menu>', () => {
-    expect(element(by.css('<%= name.kebab %>-app sidebar-menu')).isPresent()).toBe(true);
+    expect(element(by.css('Todo-app sidebar-menu')).isPresent()).toBe(true);
   });
 
   it('should have a main title', () => {
@@ -20,6 +20,6 @@ describe('<%= name.kebab %>App E2E test', () => {
   });
 
   it('should have a main div', () => {
-    expect(element(by.css('<%= name.kebab %>-app div#main')).isPresent()).toBe(true);
+    expect(element(by.css('Todo-app div#main')).isPresent()).toBe(true);
   });
 });
