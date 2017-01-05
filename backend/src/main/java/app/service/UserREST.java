@@ -5,11 +5,9 @@
  */
 package app.service;
 
-import app.entity.Usuario;
-import app.util.MD5;
+import app.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.DELETE;
@@ -32,9 +30,9 @@ import org.demoiselle.jee.security.annotation.RequiredRole;
  * @author gladson
  */
 @Authenticated
-@Api("Usuario")
-@Path("usuario")
-public class UsuarioREST extends AbstractREST<Usuario, String> {
+@Api("User")
+@Path("user")
+public class UserREST extends AbstractREST<User, String> {
 
     @Inject
     private DemoiselleUser dml;
@@ -45,7 +43,7 @@ public class UsuarioREST extends AbstractREST<Usuario, String> {
     @ValidatePayload
     @Authenticated(enable = false)
     @ApiOperation(value = "persist entity")
-    public Usuario persist(Usuario entity) {
+    public User persist(User entity) {
         return bc.persist(entity);
     }
 
@@ -54,7 +52,7 @@ public class UsuarioREST extends AbstractREST<Usuario, String> {
     @Transactional
     @ValidatePayload
     @ApiOperation(value = "full update entity")
-    public Usuario merge(Usuario entity) {
+    public User merge(User entity) {
         if (entity.getId().equalsIgnoreCase(dml.getIdentity())) {
             return bc.merge(entity);
         } else {
@@ -68,7 +66,7 @@ public class UsuarioREST extends AbstractREST<Usuario, String> {
     @OnlyOwner(field = "id")
     @Transactional
     @ApiOperation(value = "find by ID")
-    public Usuario find(@PathParam("id") final String id) {
+    public User find(@PathParam("id") final String id) {
         if (id.equalsIgnoreCase(dml.getIdentity())) {
             return bc.find(id);
         } else {

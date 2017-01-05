@@ -4,11 +4,11 @@
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <jta-data-source>java:/jboss/datasources/ExampleDS</jta-data-source>
     <class>app.entity.Todo</class>
-    <class>app.entity.Usuario</class>
+    <class>app.entity.User</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <shared-cache-mode>ALL</shared-cache-mode>
     <properties>
       <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-      <!--<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>-->
       <property name="hibernate.show_sql" value="true"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>

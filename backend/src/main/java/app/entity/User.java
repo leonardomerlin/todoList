@@ -8,6 +8,7 @@ package app.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -36,14 +37,8 @@ import org.hibernate.validator.constraints.Email;
 @Table(name = "usuario")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
-    , @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id")
-    , @NamedQuery(name = "Usuario.findByNome", query = "SELECT u FROM Usuario u WHERE u.nome = :nome")
-    , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
-})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Usuario implements Serializable {
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -57,7 +52,7 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Size(min = 3, max = 128)
     @Column(nullable = false, length = 128)
-    private String nome;
+    private String firstName;
 
     @Email
     @NotNull
@@ -70,26 +65,13 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Size(min = 8, max = 128)
     @Column(length = 128)
-    private String senha;
+    private String pass;
 
     @Column(length = 16)
-    private String perfil;
+    private String role;
 
-    @OneToMany(mappedBy = "usuario", targetEntity = Todo.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", targetEntity = Todo.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Todo> todos;
-
-    public Usuario() {
-    }
-
-    public Usuario(String id) {
-        this.id = id;
-    }
-
-    public Usuario(String id, String nome, String email) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-    }
 
     public String getId() {
         return id;
@@ -99,12 +81,12 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getEmail() {
@@ -115,12 +97,20 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPass() {
+        return pass;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Set<Todo> getTodos() {
@@ -131,17 +121,29 @@ public class Usuario implements Serializable {
         this.todos = todos;
     }
 
-    public String getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.id);
+        return hash;
     }
 
     @Override
-    public String toString() {
-        return "org.demoiselle.jee7.entity.Usuario[ id=" + id + " ]";
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
 }

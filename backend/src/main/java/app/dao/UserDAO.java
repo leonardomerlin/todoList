@@ -5,13 +5,11 @@
  */
 package app.dao;
 
-import app.entity.Usuario;
+import app.entity.User;
 import app.security.Credentials;
 import app.util.MD5;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,7 +32,7 @@ import org.demoiselle.jee.security.message.DemoiselleSecurityMessages;
  *
  * @author gladson
  */
-public class UsuarioDAO extends AbstractDAO<Usuario, String> {
+public class UserDAO extends AbstractDAO<User, String> {
 
     @Inject
     private SecurityContext securityContext;
@@ -48,9 +46,6 @@ public class UsuarioDAO extends AbstractDAO<Usuario, String> {
     @Inject
     private DemoiselleSecurityMessages bundle;
 
-    @Inject
-    private Logger logger;
-
     @PersistenceContext(unitName = "TodoPU")
     protected EntityManager em;
 
@@ -60,7 +55,7 @@ public class UsuarioDAO extends AbstractDAO<Usuario, String> {
     }
 
     @Override
-    protected Predicate[] extractPredicates(MultivaluedMap<String, String> queryParameters, CriteriaBuilder criteriaBuilder, Root<Usuario> root) {
+    protected Predicate[] extractPredicates(MultivaluedMap<String, String> queryParameters, CriteriaBuilder criteriaBuilder, Root<User> root) {
         List<Predicate> predicates = new ArrayList<>();
 
         if (queryParameters.containsKey("id")) {
@@ -76,12 +71,12 @@ public class UsuarioDAO extends AbstractDAO<Usuario, String> {
         return predicates.toArray(new Predicate[]{});
     }
 
-    public Usuario verifyEmail(String email, String password) {
+    public User verifyEmail(String email, String password) {
 
         CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<Usuario> query = builder.createQuery(Usuario.class);
-        Root<Usuario> from = query.from(Usuario.class);
-        TypedQuery<Usuario> typedQuery = getEntityManager().createQuery(
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root<User> from = query.from(User.class);
+        TypedQuery<User> typedQuery = getEntityManager().createQuery(
                 query.select(from)
                         .where(builder.equal(from.get("email"), email))
         );
@@ -90,13 +85,13 @@ public class UsuarioDAO extends AbstractDAO<Usuario, String> {
             throw new DemoiselleSecurityException("Usuário não existe", Response.Status.UNAUTHORIZED.getStatusCode());
         }
 
-        Usuario usu = typedQuery.getResultList().get(0);
+        User usu = typedQuery.getResultList().get(0);
 
         if (usu == null) {
             throw new DemoiselleSecurityException("Usuário não existe", Response.Status.UNAUTHORIZED.getStatusCode());
         }
 
-        if (!usu.getSenha().equalsIgnoreCase(MD5.parser(password))) {
+        if (!usu.getPass().equalsIgnoreCase(MD5.parser(password))) {
             throw new DemoiselleSecurityException("Senha incorreta", Response.Status.UNAUTHORIZED.getStatusCode());
         }
 
@@ -104,9 +99,9 @@ public class UsuarioDAO extends AbstractDAO<Usuario, String> {
     }
 
     @Override
-    public Usuario persist(Usuario entity) {
-        entity.setSenha(MD5.parser(entity.getSenha()));
-        entity.setPerfil("USER");
+    public User persist(User entity) {
+        entity.setPass(MD5.parser(entity.getPass()));
+        entity.setRole("USER");
         return super.persist(entity);
     }
 
@@ -116,7 +111,7 @@ public class UsuarioDAO extends AbstractDAO<Usuario, String> {
 
     public String login(Credentials credentials) {
 
-        Usuario usu = verifyEmail(credentials.getUsername(), credentials.getPassword());
+        User usu = verifyEmail(credentials.getUsername(), credentials.getPassword());
         if (usu == null) {
             throw new DemoiselleSecurityException(bundle.invalidCredentials(), Response.Status.UNAUTHORIZED.getStatusCode());
         }
@@ -124,9 +119,9 @@ public class UsuarioDAO extends AbstractDAO<Usuario, String> {
         MultivaluedMap<String, String> values = new MultivaluedHashMap<>();
         values.putSingle("usuario", usu.getId());
 
-        loggedUser.setName(usu.getNome());
+        loggedUser.setName(usu.getFirstName());
         loggedUser.setIdentity("" + usu.getId());
-        loggedUser.addRole(usu.getPerfil());
+        loggedUser.addRole(usu.getRole());
 
         loggedUser.addParam("Email", usu.getEmail());
         securityContext.setUser(loggedUser);

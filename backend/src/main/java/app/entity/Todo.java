@@ -5,8 +5,6 @@
  */
 package app.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -37,12 +35,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "todo")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@NamedQueries({
-    @NamedQuery(name = "Todo.findAll", query = "SELECT u FROM Todo u")
-    , @NamedQuery(name = "Todo.findById", query = "SELECT u FROM Todo u WHERE u.id = :id")
-    , @NamedQuery(name = "Todo.findByNome", query = "SELECT u FROM Todo u WHERE u.nome = :nome")
-    , @NamedQuery(name = "Todo.findByUsuario", query = "SELECT u FROM Todo u WHERE u.usuario.id = :usuarioId")
-})
 public class Todo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,80 +49,25 @@ public class Todo implements Serializable {
     @NotNull
     @Size(min = 1, max = 128)
     @Column(nullable = false, length = 128)
-    private String nome;
+    private String description;
 
     private String status;
 
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date datafim;
+    private Date dateEnd;
 
-    private int adiada;
+    private int changed;
 
     @Basic(optional = false)
     @NotNull
     @JoinColumn(name = "usuario_id", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
-    private Usuario usuario;
-
-    public Todo() {
-    }
-
-    public Todo(String id) {
-        this.id = id;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Date getDatafim() {
-        return datafim;
-    }
-
-    public void setDatafim(Date datafim) {
-        this.datafim = datafim;
-    }
-
-    public int getAdiada() {
-        return adiada;
-    }
-
-    public void setAdiada(int adiada) {
-        this.adiada = adiada;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+    private User user;
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -146,12 +83,58 @@ public class Todo implements Serializable {
             return false;
         }
         final Todo other = (Todo) obj;
-        return Objects.equals(this.id, other.id);
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
-    @Override
-    public String toString() {
-        return "org.demoiselle.jee7.entity.Todo[ id=" + id + " ]";
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(Date dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public int getChanged() {
+        return changed;
+    }
+
+    public void setChanged(int changed) {
+        this.changed = changed;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }

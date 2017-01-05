@@ -24,22 +24,4 @@ public class TodoDAO extends AbstractDAO<Todo, String> {
         return em;
     }
 
-//    @Transactional
-//    @PostConstruct
-//    public void init() {
-//        if (usuarioDAO.find().getCount() <= 0) {
-//            Usuario usu = new Usuario();
-//            usu.setEmail("usuario@demoiselle.org");
-//            usu.setNome("Usuário");
-//            usu.setSenha(MD5.parser("123456"));
-//            usu = usuarioDAO.persist(usu);
-//            Todo todo = new Todo();
-//            todo.setNome("Faxina semanal");
-//            todo.setAdiada(0);
-//            todo.setDatafim(new Date());
-//            todo.setStatus("Criada");
-//            todo.setUsuario(usu);
-//            persist(todo);
-//        }
-//    }
 }

@@ -5,13 +5,13 @@
  */
 package app.bc;
 
-import app.entity.Usuario;
+import app.entity.User;
 import org.demoiselle.jee.persistence.crud.AbstractBusiness;
 
 /**
  *
  * @author gladson
  */
-public class UsuarioBC extends AbstractBusiness<Usuario, String> {
+public class UserBC extends AbstractBusiness<User, String> {
 
 }
