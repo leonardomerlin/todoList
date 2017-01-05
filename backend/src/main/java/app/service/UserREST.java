@@ -19,7 +19,7 @@ import javax.ws.rs.PathParam;
 import org.demoiselle.jee.core.api.crud.Result;
 import org.demoiselle.jee.core.api.security.DemoiselleUser;
 import org.demoiselle.jee.persistence.crud.AbstractREST;
-import org.demoiselle.jee.security.annotation.OnlyOwner;
+//import org.demoiselle.jee.security.annotation.OnlyOwner;
 import org.demoiselle.jee.rest.annotation.ValidatePayload;
 import org.demoiselle.jee.rest.exception.DemoiselleRestException;
 import org.demoiselle.jee.security.annotation.Authenticated;
@@ -63,7 +63,7 @@ public class UserREST extends AbstractREST<User, String> {
     @GET
     @Override
     @Path("{id}")
-    @OnlyOwner(field = "id")
+//    @OnlyOwner(field = "id")
     @Transactional
     @ApiOperation(value = "find by ID")
     public User find(@PathParam("id") final String id) {
