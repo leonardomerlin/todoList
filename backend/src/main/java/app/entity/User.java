@@ -36,7 +36,6 @@ import org.hibernate.validator.constraints.Email;
 @Entity
 @Table(name = "usuario")
 @XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User implements Serializable {
 

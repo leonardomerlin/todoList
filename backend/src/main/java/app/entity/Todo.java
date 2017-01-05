@@ -34,7 +34,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "todo")
 @XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Todo implements Serializable {
 
     private static final long serialVersionUID = 1L;
