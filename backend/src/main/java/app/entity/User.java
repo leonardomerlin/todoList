@@ -19,6 +19,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -30,7 +31,8 @@ import org.hibernate.validator.constraints.Email;
  * @author gladson
  */
 @Entity
-@Table(name = "usuario")
+@Table(uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"email"})})
 @XmlRootElement
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User implements Serializable {
@@ -53,7 +55,7 @@ public class User implements Serializable {
     @NotNull
     @Basic(optional = false)
     @Size(min = 5, max = 128)
-    @Column(nullable = false, length = 128, unique = true)
+    @Column(name = "email", nullable = false, length = 128, unique = true)
     private String email;
 
     @NotNull
