@@ -6,7 +6,7 @@ import { NotificationService } from '../shared';
 import { LoginService } from './shared/login.service';
 
 @Component({
-  selector: '<%= prefix.kebab %>-login',
+  selector: 'todo-login',
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {

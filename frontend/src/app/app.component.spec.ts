@@ -6,7 +6,7 @@ import { SidebarMenuComponent } from './shared/sidebar-menu/sidebar-menu.compone
 import { TopNavComponent } from './shared/top-nav/top-nav.component';
 import { AppComponent } from './app.component';
 
-describe('<%= prefix.capital %>App Unit Test', () => {
+describe('TodoApp Unit Test', () => {
   // provide our implementations or mocks to the dependency injector
   beforeEach(() => {
     TestBed.configureTestingModule({

@@ -6,7 +6,7 @@ import { UserService } from './shared/user.service';
 import { User } from './shared/user.model';
 
 @Component({
-  selector: '<%= prefix.kebab %>-user',
+  selector: 'todo-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 

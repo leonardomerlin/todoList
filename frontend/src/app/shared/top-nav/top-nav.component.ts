@@ -6,7 +6,7 @@ import { NavigationEnd, Router } from '@angular/router';
 let template = require('./top-nav.template.html');
 
 @Component({
-  selector: '<%= prefix.kebab %>-top-nav',
+  selector: 'todo-top-nav',
   styleUrls: ['./top-nav.component.scss'],
   template
 })

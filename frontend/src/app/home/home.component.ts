@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../shared/notification.service';
 
 @Component({
-  selector: '<%= prefix.kebab %>-home',
+  selector: 'todo-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

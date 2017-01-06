@@ -7,7 +7,7 @@ import { LoginService } from '../../login/shared/login.service';
 let template = require('./sidebar-menu.template.html');
 
 @Component({
-  selector: '<%= prefix.kebab %>-sidebar-menu',
+  selector: 'todo-sidebar-menu',
   styleUrls: ['./sidebar-menu.component.scss'],
   template
 })

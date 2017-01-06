@@ -4,7 +4,7 @@ describe('TodoApp E2E test', () => {
   });
 
   it('should have a title', () => {
-    expect(browser.getTitle()).toEqual('<%= name.capital %> App');
+    expect(browser.getTitle()).toEqual('Todo App');
   });
 
   it('should have <tov-nav>', () => {
@@ -16,7 +16,7 @@ describe('TodoApp E2E test', () => {
   });
 
   it('should have a main title', () => {
-    expect(element(by.css('#main h1')).getText()).toEqual('<%= name.capital %> App');
+    expect(element(by.css('#main h1')).getText()).toEqual('Todo App');
   });
 
   it('should have a main div', () => {

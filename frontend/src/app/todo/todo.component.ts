@@ -7,7 +7,7 @@ import { TodoService } from './shared/todo.service';
 import { Todo } from './shared/todo.model';
 
 @Component({
-  selector: '<%= prefix.kebab %>-todo',
+  selector: 'todo-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.scss']
 })

@@ -6,7 +6,7 @@ import { UserService } from '../shared/user.service';
 import { User } from '../shared/user.model';
 
 @Component({
-  selector: '<%= prefix.kebab %>-user-edit',
+  selector: 'todo-user-edit',
   templateUrl: './user-edit.component.html'
 })
 export class UserEditComponent implements OnInit, OnDestroy {

@@ -7,7 +7,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import '../style/global.scss';
 
 @Component({
-  selector: '<%= prefix.kebab %>-app', // <<%= prefix.kebab %>-app></<%= prefix.kebab %>-app>
+  selector: 'todo-app', // <todo-app></todo-app>
   styleUrls: ['./app.component.scss'],
   template: require('./app.component.html')
 })

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '@demoiselle/security';
 
 @Component({
-  selector: '<%= prefix.kebab %>-user-dropdown',
+  selector: 'todo-user-dropdown',
   templateUrl: './user-dropdown.template.html'
 })
 export class UserDropdownComponent {
