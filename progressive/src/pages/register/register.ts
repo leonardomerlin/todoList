@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { LoginService } from '../../providers/login-service';
 import { LoginPage } from '../login/login';
+import { TodoPage } from '../page2/page2';
 
 @Component({
   selector: 'page-register',
@@ -36,6 +37,16 @@ export class RegisterPage {
   }
 
   register() {
-    this.loginService.register(this.user).subscribe(res => console.log('res', res));
+    this.loginService.register(this.user).subscribe(res => {
+      // console.log('res', res);z
+      let newUser = res.json();
+      this.loginService.signin({
+        username: newUser.email,
+        password: this.user.pass
+      }).subscribe(res2 => {
+        // console.log('res2', res2);
+        this.navCtrl.push(TodoPage, {});
+      });
+    });
   }
 }

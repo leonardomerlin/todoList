@@ -13,7 +13,7 @@ import { Todo } from './todo-model';
 @Injectable()
 export class TodoService {
 
-  endpoint: string = 'http://localhost:8080/todo/api/user/';
+  endpoint: string = '~main';
 
   constructor(protected http: Http, protected authService: AuthService) {
     console.log('Hello TodoService Provider');
@@ -25,8 +25,7 @@ export class TodoService {
 
   list(currentPage: number, itemsPerPage: number) {
     console.log('TODO: implementar paginação:', currentPage, itemsPerPage);
-
-    let url = this.endpoint + this.authService.getIdentityFromToken();
+    let url = this.endpoint + '/user/' + this.authService.getIdentityFromToken();
     return this.http.get(url).map(res => {
       return <Todo[]>(res.json().todos);
     });

@@ -15,16 +15,18 @@ import { TodoService } from '../providers/todo-service';
 
 // App Components
 import { MyApp } from './app.component';
-import { Page1 } from '../pages/page1/page1';
-import { Page2 } from '../pages/page2/page2';
+// import { Page1 } from '../pages/page1/page1';
+import { TodoPage } from '../pages/page2/page2';
+import { TodoFormPage } from '../pages/todo-form/todo-form';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 
 @NgModule({
   declarations: [
     MyApp,
-    Page1,
-    Page2,
+    // Page1,
+    TodoPage,
+    TodoFormPage,
     LoginPage,
     RegisterPage
   ],
@@ -39,8 +41,9 @@ import { RegisterPage } from '../pages/register/register';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    Page1,
-    Page2,
+    // Page1,
+    TodoPage,
+    TodoFormPage,
     LoginPage,
     RegisterPage
   ],
@@ -54,7 +57,7 @@ import { RegisterPage } from '../pages/register/register';
     }),
     AuthServiceProvider({
       authEndpointUrl: '~main/',
-      loginResourcePath: 'user',
+      loginResourcePath: 'auth',
       tokenKey: 'id_token',
       loginRoute: '/login'
     }),
