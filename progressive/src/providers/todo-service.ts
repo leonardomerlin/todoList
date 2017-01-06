@@ -52,11 +52,20 @@ export class TodoService {
     return this.http.delete('~main/todo/' + todo.id);
   }
 
-  defer(todo: Todo) {
-    console.log('TODO: implement defer:', todo);
+  defer(todo: Todo, days: number) {
+    todo.user = {
+      id: this.authService.getIdentityFromToken()
+    };
+    
+    // TODO: Add days
+    // todo.dateend += days;
+    
+    return this.update(todo);
   }
 
   archive(todo: Todo) {
-    console.log('TODO: implement archive:', todo);
+    todo.status = 'archived';
+
+    return this.update(todo);
   }
 }

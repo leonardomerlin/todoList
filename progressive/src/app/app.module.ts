@@ -15,8 +15,7 @@ import { TodoService } from '../providers/todo-service';
 
 // App Components
 import { MyApp } from './app.component';
-// import { Page1 } from '../pages/page1/page1';
-import { TodoPage } from '../pages/page2/page2';
+import { TodoListPage } from '../pages/todo-list/todo-list';
 import { TodoFormPage } from '../pages/todo-form/todo-form';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
@@ -24,8 +23,7 @@ import { RegisterPage } from '../pages/register/register';
 @NgModule({
   declarations: [
     MyApp,
-    // Page1,
-    TodoPage,
+    TodoListPage,
     TodoFormPage,
     LoginPage,
     RegisterPage
@@ -41,8 +39,7 @@ import { RegisterPage } from '../pages/register/register';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    // Page1,
-    TodoPage,
+    TodoListPage,
     TodoFormPage,
     LoginPage,
     RegisterPage

@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { LoginService } from '../../providers/login-service';
 import { RegisterPage } from '../register/register';
-import { TodoPage } from '../page2/page2';
+import { TodoListPage } from '../todo-list/todo-list';
 
 @Component({
   selector: 'page-login',
@@ -45,7 +45,7 @@ export class LoginPage {
         res => {
           console.log('Signed-in:', res);
           // this.loginService.proceedToRedirect(['']);
-          this.navCtrl.push(TodoPage, {});
+          this.navCtrl.push(TodoListPage, {});
         },
         error => {
           if (error.status === 401 || error.status === 406) {

@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { LoginService } from '../../providers/login-service';
 import { LoginPage } from '../login/login';
-import { TodoPage } from '../page2/page2';
+import { TodoListPage } from '../todo-list/todo-list';
 
 @Component({
   selector: 'page-register',
@@ -27,8 +27,6 @@ export class RegisterPage {
   }
 
   onSubmit($event, form) {
-    console.log('TODO: create new user', form);
-    console.log('TODO: signin new user', form);
     this.register();
   }
 
@@ -36,16 +34,19 @@ export class RegisterPage {
     this.navCtrl.push(LoginPage, {});
   }
 
+  /**
+   * Register and Sign-in a new user.
+   */
   register() {
     this.loginService.register(this.user).subscribe(res => {
-      // console.log('res', res);z
+      // console.log('User created:', res);
       let newUser = res.json();
       this.loginService.signin({
         username: newUser.email,
         password: this.user.pass
       }).subscribe(res2 => {
-        // console.log('res2', res2);
-        this.navCtrl.push(TodoPage, {});
+        // console.log('User logged-in:', res2);
+        this.navCtrl.push(TodoListPage, {});
       });
     });
   }

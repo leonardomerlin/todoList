@@ -2,11 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
-// import { Page1 } from '../pages/page1/page1';
-import { TodoPage } from '../pages/page2/page2';
-// import { TodoFormPage } from '../pages/todo-form/todo-form';
+import { TodoListPage } from '../pages/todo-list/todo-list';
 import { LoginPage } from '../pages/login/login';
-import { RegisterPage } from '../pages/register/register';
 
 @Component({
   templateUrl: 'app.html'
@@ -14,8 +11,7 @@ import { RegisterPage } from '../pages/register/register';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // rootPage: any = Page1;
-  rootPage: any = TodoPage;
+  rootPage: any = TodoListPage;
 
   pages: Array<{ title: string, component: any }>;
 
@@ -24,9 +20,8 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'To-Do\'s', component: TodoPage },
-      { title: 'Login', component: LoginPage },
-      { title: 'Register', component: RegisterPage }
+      { title: 'To-Do\'s', component: TodoListPage },
+      { title: 'Login', component: LoginPage }
     ];
   }
 
