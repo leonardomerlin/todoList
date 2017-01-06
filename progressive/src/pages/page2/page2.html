@@ -3,30 +3,29 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Page Two</ion-title>
+        <ion-title>To-Do's</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
     <ion-list>
-        <ion-item-sliding *ngFor="let item of items" (click)="itemTapped($event, item)">
+        <ion-item-sliding *ngFor="let todo of todos" (click)="itemTapped($event, todo)">
             <ion-item>
-                {{item.title}}
-                <div class="item-note" item-right>
-                    {{item.note}}
+                <div class="todo-description">{{todo.description}}</div>
+                <div class="todo-details" item-right>
+                    ID: {{todo.id}}
                 </div>
             </ion-item>
             <ion-item-options side="left">
-                <button ion-button (click)="favorite(item)">Favorite</button>
-                <button ion-button color="danger" (click)="share(item)">Share</button>
+                <button ion-button (click)="defer($event, todo)">Defer</button>
             </ion-item-options>
 
             <ion-item-options side="right">
-                <button ion-button (click)="unread(item)">Unread</button>
+                <button ion-button (click)="archive($event, todo)">Archive</button>
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>
-    <div *ngIf="selectedItem" padding>
-        You navigated here from <b>{{selectedItem.title}}</b>
+    <div *ngIf="selectedTodo" padding>
+        You navigated here from <b>{{selectedTodo.title}}</b>
     </div>
 </ion-content>
