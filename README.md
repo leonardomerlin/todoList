@@ -8,16 +8,20 @@ Instalar Java 8
 git clone https://github.com/PGXP/todoList.git
 cd todoList/backend
 mvn clean package -Pwildfly-swarm && java -jar -Xmx128m target/todo-swarm.jar
+
+Servidor público
+http://todo-demoiselle.44fs.preview.openshiftapps.com/todo/
 ```
-#### Frontend - Angular1
+#### Frontend - Angular
 ``` javascripts
 Instalar NodeJS 
-cd todoList/frontend/angular1
-npm install && npm bower
-```
-#### Frontend - Angular2
-``` javascripts
-Instalar NodeJS 
-cd todoList/frontend/angular2
+cd todoList/frontend
 npm install
+npm start
+```
+#### Frontend - Progressive
+``` javascripts
+Instalar NodeJS 
+npm install
+ionic serve
 ```
