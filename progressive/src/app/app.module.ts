@@ -1,24 +1,65 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
+// import { HttpModule } from '@demoiselle/http';
+import { AuthServiceProvider, SecurityModule } from '@demoiselle/security';
+import { HttpServiceProvider } from '@demoiselle/http';
+
+// Providers / Services
+import { LoginService } from '../providers/login-service';
+import { TodoService } from '../providers/todo-service';
+
+// App Components
 import { MyApp } from './app.component';
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
+import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
 
 @NgModule({
   declarations: [
     MyApp,
     Page1,
-    Page2
+    Page2,
+    LoginPage,
+    RegisterPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule,
+    FormsModule,
+    SecurityModule,
+    RouterModule.forRoot([], { useHash: true })
   ],
+  exports: [RouterModule],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     Page1,
-    Page2
+    Page2,
+    LoginPage,
+    RegisterPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    HttpServiceProvider({
+      endpoints: { main: 'http://localhost:8080/todo/api/' },
+      multitenancy: false,
+      unAuthorizedRoute: '/login',
+      tokenKey: 'id_token'
+    }),
+    AuthServiceProvider({
+      authEndpointUrl: '~main/',
+      loginResourcePath: 'user',
+      tokenKey: 'id_token',
+      loginRoute: '/login'
+    }),
+    LoginService,
+    TodoService
+  ]
 })
-export class AppModule {}
+export class AppModule { }
