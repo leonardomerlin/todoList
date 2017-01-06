@@ -53,7 +53,7 @@ public class User implements Serializable {
     @NotNull
     @Basic(optional = false)
     @Size(min = 5, max = 128)
-    @Column(nullable = false, length = 128)
+    @Column(nullable = false, length = 128, unique = true)
     private String email;
 
     @NotNull
