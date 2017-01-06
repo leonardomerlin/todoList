@@ -59,7 +59,7 @@ public class Todo implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
